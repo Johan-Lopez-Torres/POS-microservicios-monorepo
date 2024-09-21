@@ -8,5 +8,8 @@ RUN mvn clean package -DskipTests
 # RUN STAGE
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/*.jar ./facturacion-electronica.jar
+EXPOSE 8080
+ARG  JAR_FILE=target/*.jar
+COPY --from=build /app/${JAR_FILE} facturacion-electronica.jar
 CMD ["java", "-jar", "facturacion-electronica.jar"]
+

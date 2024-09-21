@@ -8,8 +8,9 @@ const Factura: React.FC = () => {
     setItems([...items, { cant: 1, codigo: '', descripcion: '', pUnit: 0, total: 0 }]);
   };
 
+
   return (
-    <div className="bg-gray-900 text-gray-300 p-4 font-sans">
+    <div className="bg-gray-900 text-gray-300 p-4 font-sans p-14">
       <div className="bg-yellow-800 text-yellow-300 p-2 mb-4 text-sm">
         <span className="font-bold">DOCUMENTO SIN VALOR:</span> Esta empresa está en modo <span className="bg-green-700 text-white px-1">DESARROLLO</span> (modo de pruebas)
       </div>
@@ -40,15 +41,25 @@ const Factura: React.FC = () => {
       </div>
 
       <div className="mb-4">
-        <div className="flex mb-2">
-          <input type="text" value="ANGEL CAVIR CABANA OCHOA" className="flex-grow bg-gray-800 p-2 rounded-l" />
-          <select className="bg-gray-800 p-2 border-l border-gray-700">
-            <option>DNI</option>
-          </select>
-          <input type="text" value="77777777" className="w-32 bg-gray-800 p-2" />
-          <button className="bg-gray-800 p-2 rounded-r"><Search size={20} /></button>
-        </div>
-        <input type="text" value="ASENT.H. AMISTAD 8 DE OCTUBRE MZ. L LT. 2 VILLA MARIA DEL TRIUNFO LIMA LIMA" className="w-full bg-gray-800 p-2 rounded" />
+          <div className="flex mb-2">
+              <input type="text" placeholder="ANGEL CAVIR CABANA OCHOA"
+                     className="flex-grow bg-gray-800 p-2 rounded-md mr-7"/>
+              <select className="bg-gray-800 p-2 border-l border-gray-700">
+                  <option>DNI</option>
+              </select>
+              <select className="bg-gray-800 p-2 border-l border-gray-700">
+
+                  <option>Tipo de comprobante</option>
+                  <option>Boleta</option>
+                  <option>Factura</option>
+
+              </select>
+
+              <input type="text" placeholder="77777777" className="w-32 bg-gray-800 p-2"/>
+              <button className="bg-gray-800 p-2 rounded-r"><Search size={20}/></button>
+          </div>
+          <input type="text" placeholder="ASENT.H. AMISTAD 8 DE OCTUBRE MZ. L LT. 2 VILLA MARIA DEL TRIUNFO LIMA LIMA"
+                 className="w-full bg-gray-800 p-2 rounded" />
       </div>
 
       <div className="flex mb-4">

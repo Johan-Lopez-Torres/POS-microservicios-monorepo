@@ -1,12 +1,13 @@
 version: '3'
 
 services:
-  restaurante-app:
-    build: .
+  sistema-ventas:
+    build: sistema-ventas
     ports:
       - "8080:8080"
+    image: backend:1.0.1
     environment:
-      DB_URL: jdbc:mysql://clinica_vet:3306/facturacion_electronica?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_URL: jdbc:mysql://sistema-ventas-db:b:3306/facturacion_electronica?createDatabaseIfNotExist=true&serverTimezone=UTC
       DB_USER_NAME: root
       DB_PASSWORD: 1234
     restart: always
@@ -16,7 +17,7 @@ services:
     networks:
         - spring-demo
 
-  restaurante-database:
+  sistema-ventas-db:
     image: mysql:8.0.33
     ports:
       - "3307:3306"
@@ -34,6 +35,14 @@ services:
     networks:
         - spring-demo
 
+  frontend-app:
+    build: frontend-app
+    image:  frontend:1.0.1
+    ports:
+      - "5173:5173"
+    restart: always
+    depends_on:
+      - restaurante-app
 
 networks:
   spring-demo:
