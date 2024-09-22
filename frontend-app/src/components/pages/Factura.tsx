@@ -10,9 +10,9 @@ const Factura: React.FC = () => {
 
 
   return (
-    <div className="bg-gray-900 text-gray-300 p-4 font-sans p-14">
-      <div className="bg-yellow-800 text-yellow-300 p-2 mb-4 text-sm">
-        <span className="font-bold">DOCUMENTO SIN VALOR:</span> Esta empresa está en modo <span className="bg-green-700 text-white px-1">DESARROLLO</span> (modo de pruebas)
+    <div className="bg-gray-900 text-gray-300 p-4 font-sans p-20">
+      <div className="bg-yellow-800 text-yellow-300 p-3 mb-4 text-sm rounded-md">
+        <span className="font-bold">DOCUMENTO SIN VALOR:</span> Esta empresa está en modo <span className="bg-green-700 text-white  rounded-md py-1 px-2">DESARROLLO</span> (modo de pruebas)
       </div>
 
       <div className="flex mb-4">
