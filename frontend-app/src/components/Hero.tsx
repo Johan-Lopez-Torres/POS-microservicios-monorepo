@@ -30,7 +30,7 @@ export default function Hero() {
                         <div className="absolute bottom-0 left-0 right-0 bg-gray-400 bg-opacity-40 backdrop-blur-sm px-7 pb-5  text-black p-4">
                             <div className="flex items-center justify-between mb-2 ">
                                 <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">LIVE</span>
-                                <span className="text-sm font-medium">45% onboarding</span>
+                                <span className="text-sm font-medium text-white font-sans">45% onboarding</span>
                             </div>
                             <p className="text-xl font-extrabold text-white">Give an amazing on-board experience of your product</p>
                         </div>

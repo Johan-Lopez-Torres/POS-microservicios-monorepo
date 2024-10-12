@@ -5,7 +5,7 @@ const VentaExitosaModal: React.FC = () => {
   return (
       <div className="min-h-screen bg-gray-100 text-gray-800 p-4 font-sans content-center">
         <div className="max-w-2xl mx-auto">
-          <div className="p-6 rounded-lg bg-white shadow-lg text-center">
+          <div className="p-6 rounded-xl bg-white shadow-lg text-center">
             <div className="flex justify-center mb-4">
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
                 <svg
@@ -25,12 +25,12 @@ const VentaExitosaModal: React.FC = () => {
               Podrás encontrar todos tus documentos en la sección <span className="text-blue-400">DOCUMENTOS</span>
             </p>
 
-            <div className="inline-block bg-yellow-600 text-yellow-100 text-xs font-semibold p-2 rounded-lg mb-6">
+            <div className="inline-block bg-yellow-500 text-white  text-xs font-extrabold p-2 rounded-lg mb-6">
               DOCUMENTO SIN VALOR
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <button className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
+              <button className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-1 px-4 rounded-lg">
                 <Printer size={18} className="mr-2" />
                 <span>Imprimir</span>
               </button>

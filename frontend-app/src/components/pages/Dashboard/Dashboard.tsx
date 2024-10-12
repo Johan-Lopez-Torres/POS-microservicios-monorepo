@@ -60,7 +60,7 @@ export function Dashboard() {
                                 <ShoppingCart className="h-4 w-4"/>
                                 Orders
                                 <Badge
-                                    className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                    className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-600 ">
                                     6
                                 </Badge>
                             </a>
@@ -135,7 +135,7 @@ export function Dashboard() {
                                     <ShoppingCart className="h-5 w-5"/>
                                     Orders
                                     <Badge
-                                        className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                                        className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-600">
                                         6
                                     </Badge>
                                 </a>

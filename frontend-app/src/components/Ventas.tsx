@@ -33,7 +33,7 @@ const ProductList: React.FC = () => {
             </div>
 
             {/* Contenedor con scroll */}
-            <div className="overflow-y-auto   max-h-[500px] border rounded-lg custom-scrollbar">
+            <div className="overflow-y-auto   max-h-[480px] border rounded-lg custom-scrollbar">
                 <Table>
                     <TableHeader>
                         <TableRow>
