@@ -1,5 +1,6 @@
 // components/Navbar.tsx
 import { Link } from "react-router-dom";
+import Footer from "../Footer";
 
 function RoutesPage() {
   return (
@@ -20,6 +21,7 @@ function RoutesPage() {
         <li><Link to="/boleta">Boleta</Link></li>
         <li><Link to="/checkout">Checkout</Link></li>
       </ul>
+      <Footer />
     </nav>
   );
 }

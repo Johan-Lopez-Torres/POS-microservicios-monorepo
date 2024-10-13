@@ -10,8 +10,8 @@ export const checkoutSchema = z.object({
   zipCode: z.string().regex(/^\d{5}(-\d{4})?$/, { message: "Invalid ZIP code" }),
   country: z.string().min(2, { message: "Country must be at least 2 characters" }),
   phone: z.string().regex(/^\d{10}$/, { message: "Invalid phone number" }),
-
-  cardNumber: z.string().regex(/^\d{16}$/, { message: "Invalid card number" }),
+  paymentMethod: z.string().min(2, { message: "Payment method must be at least 2 characters" }),
+  cardNumber: z.string().length(16, { message: "Invalid card number" }).regex(/^\d{16}$/, { message: "Invalid card number" }),
   cardExpiry : z.string().regex(/^\d{2}\/\d{2}$/, { message: "Invalid card expiry" }),
   cardCVC: z.string().regex(/^\d{3}$/, { message: "Invalid CVV" }),
   saveInfo: z.boolean().optional(),

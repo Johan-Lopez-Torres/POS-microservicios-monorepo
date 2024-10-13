@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import {
-  Loader2,
-  CheckCircle,
-  AlertCircle,
-  CreditCard,
-  Plus,
-  Minus,
-  Trash2,
-} from "lucide-react";
+import { Loader2, CheckCircle, AlertCircle, CreditCard } from "lucide-react";
 
 import { initialCartItems } from "@/data/Cart";
 import { Button } from "@/components/ui/button";
@@ -26,7 +18,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Toast } from "@/components/ui/toast";
-import { Progress } from "@/components/ui/progress";
 import {
   Card,
   CardContent,
@@ -50,7 +41,7 @@ type CheckoutFormData = z.infer<typeof checkoutSchema>;
 // Form schema
 import { checkoutSchema } from "@/forms/CheckoutForm";
 import Cart from "../ui/Cart";
-import Cartr from "../ui/Cart";
+import CardDetails from "../ui/CardDetails";
 
 export default function EnhancedCheckout() {
   const [step, setStep] = useState(1);
@@ -63,15 +54,17 @@ export default function EnhancedCheckout() {
 
   const [cartItems, setCartItems] = useState<Product[]>(initialCartItems);
 
+  const methods = useForm<CheckoutFormData>({
+    resolver: zodResolver(checkoutSchema),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     control,
-  } = useForm<CheckoutFormData>({
-    resolver: zodResolver(checkoutSchema),
-  });
+  } = methods;
 
   const paymentMethod = watch("paymentMethod");
   console.log("hola" + paymentMethod);
@@ -151,7 +144,7 @@ export default function EnhancedCheckout() {
     return (
       <div className={`relative w-full h-4 bg-gray-200 ${className}`}>
         <div
-          className={`absolute top-0 left-0 h-full ${progressClassName}`}
+          className={`absolute top-0 left-0 h-full rounded-lg ${progressClassName}`}
           style={{ width: `${value}%` }}
         />
       </div>
@@ -184,8 +177,6 @@ export default function EnhancedCheckout() {
           </div>
         </div>
 
-
-
         {!orderComplete ? (
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
@@ -199,13 +190,13 @@ export default function EnhancedCheckout() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
                     >
-                    <Cart
-                      cartItems={cartItems}
-                      handleQuantityChange={handleQuantityChange}
-                      handleRemoveItem={handleRemoveItem}
-                      totalItems={totalItems}
-                      setStep={setStep}
-                    />
+                      <Cart
+                        cartItems={cartItems}
+                        handleQuantityChange={handleQuantityChange}
+                        handleRemoveItem={handleRemoveItem}
+                        totalItems={totalItems}
+                        setStep={setStep}
+                      />
                     </motion.div>
                   )}
 
@@ -408,54 +399,17 @@ export default function EnhancedCheckout() {
                               </RadioGroup>
                             )}
                           />
-
-                          {paymentMethod === "credit-card" && (
-                            <div className="mt-4 space-y-4">
-                              <div className="space-y-2">
-                                <Label htmlFor="cardNumber">Card Number</Label>
-                                <Input
-                                  id="cardNumber"
-                                  {...register("cardNumber")}
-                                  placeholder="1234 5678 9012 3456"
-                                />
-                                {errors.cardNumber && (
-                                  <p className="text-red-500 text-sm">
-                                    {errors.cardNumber.message}
-                                  </p>
-                                )}
-                              </div>
-                              <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                  <Label htmlFor="cardExpiry">
-                                    Expiry Date
-                                  </Label>
-                                  <Input
-                                    id="cardExpiry"
-                                    {...register("cardExpiry")}
-                                    placeholder="MM/YY"
-                                  />
-                                  {errors.cardExpiry && (
-                                    <p className="text-red-500 text-sm">
-                                      {errors.cardExpiry.message}
-                                    </p>
-                                  )}
-                                </div>
-                                <div className="space-y-2">
-                                  <Label htmlFor="cardCVC">CVC</Label>
-                                  <Input
-                                    id="cardCVC"
-                                    {...register("cardCVC")}
-                                    placeholder="123"
-                                  />
-                                  {errors.cardCVC && (
-                                    <p className="text-red-500 text-sm">
-                                      {errors.cardCVC.message}
-                                    </p>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          )}
+                          <FormProvider {...methods}>
+                            <form
+                              onSubmit={methods.handleSubmit((data) =>
+                                console.log(data)
+                              )}
+                            >
+                              {paymentMethod === "credit-card" && (
+                                <CardDetails />
+                              )}
+                            </form>
+                          </FormProvider>
                         </CardContent>
                         <CardFooter className="flex justify-between">
                           <Button variant="outline" onClick={() => setStep(2)}>
@@ -480,8 +434,8 @@ export default function EnhancedCheckout() {
             </div>
 
             {/* ORDER SUMMARY COMPONENT */}
-            <div className="relative">
-              <div className="sticky top-8">
+            <div className="relative ">
+              <div className="sticky top-8 ">
                 <Card>
                   <CardHeader>
                     <CardTitle>Order Summary</CardTitle>
@@ -492,14 +446,15 @@ export default function EnhancedCheckout() {
                         key={item.id}
                         className="flex justify-between items-center"
                       >
-                        <div className="flex items-center">
+                        <div className="flex items-center ">
                           <img
                             src={item.image}
                             alt={item.name}
                             width={40}
                             height={40}
-                            className="rounded-md mr-2 h-16 w-16 object-cover"
+                            className="rounded-md mr-2 h-16 w-16 object-cover transition duration-300 ease-in-out  hover:scale-110 "
                           />
+
                           <div className="w-4" />
                           <span>
                             {item.name} (x{item.quantity})
@@ -540,12 +495,12 @@ export default function EnhancedCheckout() {
                           value={couponCode}
                           onChange={(e) => setCouponCode(e.target.value)}
                           placeholder="Enter coupon code"
-                          className="rounded-r-none"
+                          className="rounded-r-none focus-visible:ring-transparent focus:border-2  focus:border-solid focus:border-r-0 focus:border-indigo-600"
                         />
                         <Button
                           onClick={handleCouponApply}
                           disabled={loading}
-                          className="rounded-l-none"
+                          className="rounded-l-none bg-indigo-600 hover:bg-indigo-700 "
                         >
                           Apply
                         </Button>

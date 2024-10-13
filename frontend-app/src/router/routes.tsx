@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Factura from "../components/pages/Factura";
 import Pricing from "../components/Pricing";
-import Footer from "../components/Footer";
 import Testimonios from "../components/Testimonios";
 import VentaExitosaModal from "../components/VentaExitosaModal";
 import Ventas from "../components/Ventas";
@@ -37,7 +36,6 @@ function AppRoutes() {
         <Route path="/routes-page" element={<RoutesPage />} />
         <Route path="checkout" element={<EnhancedCheckout/>} />
       </Routes>
-      <Footer />
     </Router>
   );
 }

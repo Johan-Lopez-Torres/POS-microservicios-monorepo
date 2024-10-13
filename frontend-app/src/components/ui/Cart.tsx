@@ -19,7 +19,7 @@ type CartProps = {
   setStep: (step: number) => void; // Función para cambiar el paso (checkout)
 };
 
-const Cartr: React.FC<CartProps> = ({
+const Cart: React.FC<CartProps> = ({
   cartItems,
   handleQuantityChange,
   handleRemoveItem,
@@ -95,4 +95,4 @@ const Cartr: React.FC<CartProps> = ({
   );
 };
 
-export default Cartr;
+export default Cart;
