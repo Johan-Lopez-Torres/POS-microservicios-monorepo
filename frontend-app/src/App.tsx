@@ -1,12 +1,11 @@
 
-import Footer from "./components/Footer";
-import AppRoutes from "./router/routes";
+import { CartSenderComponent } from "./components/CartWebSocket";
 
 function App() {
   return (
     <>
-      <AppRoutes />
-      <Footer />
+     
+      <CartSenderComponent />
 
     </>
   );

@@ -10,13 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { Toast } from "@/components/ui/toast";
 import {
   Card,
@@ -42,6 +36,7 @@ type CheckoutFormData = z.infer<typeof checkoutSchema>;
 import { checkoutSchema } from "@/forms/CheckoutForm";
 import Cart from "../ui/Cart";
 import CardDetails from "../ui/CardDetails";
+import ShippingDetails from "../ShippingDetails";
 
 export default function EnhancedCheckout() {
   const [step, setStep] = useState(1);
@@ -208,131 +203,20 @@ export default function EnhancedCheckout() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
                     >
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>Shipping Information</CardTitle>
-                          <CardDescription>
-                            Enter your shipping details
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="firstName">First Name</Label>
-                              <Input
-                                id="firstName"
-                                {...register("firstName")}
-                              />
-                              {errors.firstName && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.firstName.message}
-                                </p>
-                              )}
-                            </div>
-                            <div className="space-y-2">
-                              <Label htmlFor="lastName">Last Name</Label>
-                              <Input id="lastName" {...register("lastName")} />
-                              {errors.lastName && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.lastName.message}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                              id="email"
-                              type="email"
-                              {...register("email")}
-                            />
-                            {errors.email && (
-                              <p className="text-red-500 text-sm">
-                                {errors.email.message}
-                              </p>
-                            )}
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="address">Address</Label>
-                            <Input id="address" {...register("address")} />
-                            {errors.address && (
-                              <p className="text-red-500 text-sm">
-                                {errors.address.message}
-                              </p>
-                            )}
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="city">City</Label>
-                              <Input id="city" {...register("city")} />
-                              {errors.city && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.city.message}
-                                </p>
-                              )}
-                            </div>
-                            <div className="space-y-2">
-                              <Label htmlFor="state">State</Label>
-                              <Input id="state" {...register("state")} />
-                              {errors.state && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.state.message}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="zipCode">ZIP Code</Label>
-                              <Input id="zipCode" {...register("zipCode")} />
-                              {errors.zipCode && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.zipCode.message}
-                                </p>
-                              )}
-                            </div>
-                            <div className="space-y-2">
-                              <Label htmlFor="country">Country</Label>
-                              <Select
-                                onValueChange={(value) =>
-                                  register("country").onChange({
-                                    target: { value },
-                                  })
-                                }
-                              >
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select a country" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="us">
-                                    United States
-                                  </SelectItem>
-                                  <SelectItem value="ca">Canada</SelectItem>
-                                  <SelectItem value="mx">Mexico</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              {errors.country && (
-                                <p className="text-red-500 text-sm">
-                                  {errors.country.message}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="phone">Phone</Label>
-                            <Input id="phone" {...register("phone")} />
-                            {errors.phone && (
-                              <p className="text-red-500 text-sm">
-                                {errors.phone.message}
-                              </p>
-                            )}
-                          </div>
-                        </CardContent>
-                        <CardFooter className="flex justify-between">
+                      <Card >
+                        <FormProvider {...methods} >
+                          <ShippingDetails />
+                        </FormProvider>
+
+                        <CardFooter className="flex justify-between 
+                        ">
                           <Button variant="outline" onClick={() => setStep(1)}>
                             Back
                           </Button>
-                          <Button onClick={() => setStep(3)}>
+                          <Button
+                            className="bg-indigo-600 hover:bg-indigo-700"
+                            onClick={() => setStep(3)}
+                          >
                             Continue to Payment
                           </Button>
                         </CardFooter>
@@ -435,7 +319,7 @@ export default function EnhancedCheckout() {
 
             {/* ORDER SUMMARY COMPONENT */}
             <div className="relative ">
-              <div className="sticky top-8 ">
+              <div className="sticky top-8 bg-yellow-400 ">
                 <Card>
                   <CardHeader>
                     <CardTitle>Order Summary</CardTitle>
